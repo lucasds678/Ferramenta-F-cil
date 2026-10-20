@@ -1,0 +1,21 @@
+const $ = (id) => document.getElementById(id);
+const money = (value) => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const form = $("rtcForm");
+form?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const base = Number($("rtcBase").value);
+  const cbsRate = Number($("rtcCbs").value);
+  const ibsRate = Number($("rtcIbs").value);
+  const reduction = Number($("rtcReduction").value);
+  if (![base, cbsRate, ibsRate, reduction].every(Number.isFinite) || base <= 0 || cbsRate < 0 || ibsRate < 0 || cbsRate > 100 || ibsRate > 100 || reduction < 0 || reduction > 100) return;
+  const effectiveBase = base * (1 - reduction / 100);
+  const cbs = effectiveBase * cbsRate / 100;
+  const ibs = effectiveBase * ibsRate / 100;
+  $("rtcTotal").textContent = money(cbs + ibs);
+  $("rtcCbsResult").textContent = money(cbs);
+  $("rtcIbsResult").textContent = money(ibs);
+  $("rtcEffectiveBase").textContent = money(effectiveBase);
+  $("rtcExplanation").textContent = `Cálculo demonstrativo: ${cbsRate.toLocaleString("pt-BR")}% de CBS + ${ibsRate.toLocaleString("pt-BR")} % de IBS sobre a base informada após redução de ${reduction.toLocaleString("pt-BR")}%. Não considera créditos, compensações, regimes especiais ou demais regras legais.`;
+  $("rtcResult").hidden = false;
+});
+$("rtYear").textContent = new Date().getFullYear();

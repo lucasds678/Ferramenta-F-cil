@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Central gratuita do Ferramenta Fácil: pesquisa no Google e em fontes oficiais, leitor de XML de NF-e, controle de estoque, calendário de obrigações e backup local.">
+  <meta name="theme-color" content="#16794b">
+  <meta name="robots" content="index,follow">
+  <title>Central de Pesquisa e Gestão | Ferramenta Fácil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/central-ferramentas.css">
+  <script src="js/config.js"></script>
+  <script type="module" src="js/central-ferramentas.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-content">
+      <a class="logo" href="index.html">ferramenta<span>fácil</span><span class="logo-dot">.</span></a>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="index.html#ferramentas">Ferramentas</a>
+        <a href="consultas-fiscais.html">Consultas fiscais</a>
+        <a href="reforma-tributaria.html">Reforma Tributária</a>
+        <a href="central-ferramentas.html" aria-current="page">Central</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="central-hero">
+      <div class="container">
+        <span class="eyebrow"><span class="eyebrow-dot"></span> Pesquisa e organização</span>
+        <h1>Um lugar para <span>pesquisar, conferir e organizar.</span></h1>
+        <p>Use a busca do Google, encontre fontes oficiais, leia dados de XML no seu dispositivo, organize produtos e salve uma cópia dos seus registros.</p>
+        <div class="central-shortcuts">
+          <a class="button button-primary" href="#pesquisa">Pesquisar informação</a>
+          <a class="button button-secondary" href="#xml">Ler XML de nota</a>
+          <a class="button button-secondary" href="#estoque">Organizar estoque</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section central-section" id="pesquisa">
+      <div class="container">
+        <div class="section-heading"><div><span class="eyebrow">Pesquisa integrada</span><h2>Pesquise uma vez e escolha a fonte.</h2></div><p>A busca local consulta exemplos e conceitos incluídos no site. O Google e os portais oficiais abrem em novas páginas.</p></div>
+        <div class="central-card">
+          <form id="centralSearchForm" class="central-search-form">
+            <label for="centralQuery">O que você quer descobrir?</label>
+            <div class="central-search-row"><input id="centralQuery" type="search" required maxlength="240" placeholder="Ex.: NCM de camiseta, CFOP de devolução, IBS e CBS"><button class="button button-primary" type="submit">Pesquisar</button></div>
+            <div class="central-checks"><label><input type="checkbox" id="searchGoogle" checked> Google</label><label><input type="checkbox" id="searchOfficial" checked> Fontes oficiais</label><label><input type="checkbox" id="searchLocal" checked> Base local do site</label></div>
+          </form>
+          <div id="googleSearchArea" class="google-search-area"><h3>Pesquisa Google</h3><p id="googleSetupMessage">O mecanismo incorporado do Google precisa do seu ID (cx). Enquanto isso, use o botão abaixo para abrir a pesquisa gratuita do Google.</p><div id="googleCseContainer"></div><a id="googleFallback" class="button button-secondary" href="https://www.google.com/" target="_blank" rel="noopener noreferrer">Abrir pesquisa no Google</a></div>
+          <div id="localSearchResults" class="local-search-results" aria-live="polite"></div>
+          <div id="officialSearchLinks" class="official-search-links"></div>
+        </div>
+        <div class="source-note"><strong>Sobre os resultados:</strong> links de pesquisa encaminham a consulta ao Google ou ao portal selecionado. O site não lê nem verifica automaticamente todos os resultados externos. Confirme regras fiscais em fontes oficiais e considere a data de vigência.</div>
+      </div>
+    </section>
+
+    <section class="section central-section" id="xml">
+      <div class="container">
+        <div class="section-heading"><div><span class="eyebrow">Documentos fiscais</span><h2>Leitor local de XML</h2></div><p>Selecione um XML de NF-e ou NFC-e para visualizar campos básicos no navegador. O arquivo não é enviado para um servidor.</p></div>
+        <div class="central-card">
+          <label class="file-drop" for="xmlFile"><span class="file-drop-icon">XML</span><strong>Escolher arquivo XML</strong><span>O arquivo permanece no seu dispositivo.</span><input id="xmlFile" type="file" accept=".xml,text/xml,application/xml"></label>
+          <p id="xmlStatus" class="status-message" aria-live="polite">Nenhum arquivo selecionado.</p>
+          <div id="xmlResults" class="data-table-wrap" hidden></div>
+          <p class="source-note">Este leitor é uma ferramenta de visualização inicial. Não valida assinatura digital, autorização da SEFAZ nem a correção fiscal dos valores.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section central-section" id="estoque">
+      <div class="container">
+        <div class="section-heading"><div><span class="eyebrow">Gestão do negócio</span><h2>Cadastro simples de produtos</h2></div><p>Registre produtos e quantidades neste navegador. Não substitui um ERP e não sincroniza com outros dispositivos.</p></div>
+        <div class="central-card">
+          <form id="productForm" class="central-form-grid">
+            <div><label for="productName">Produto</label><input id="productName" required maxlength="120" placeholder="Ex.: Camiseta básica"></div>
+            <div><label for="productCode">Código/SKU (opcional)</label><input id="productCode" maxlength="60" placeholder="Ex.: CAM-001"></div>
+            <div><label for="productQuantity">Quantidade em estoque</label><input id="productQuantity" type="number" min="0" step="0.01" required value="0"></div>
+            <div><label for="productCost">Custo unitário (R$)</label><input id="productCost" type="number" min="0" step="0.01" required value="0"></div>
+            <div><label for="productPrice">Preço de venda (R$)</label><input id="productPrice" type="number" min="0" step="0.01" required value="0"></div>
+            <div class="form-action"><button class="button button-primary" type="submit">Adicionar produto</button></div>
+          </form>
+          <div class="table-toolbar"><strong id="inventorySummary">Nenhum produto cadastrado.</strong><button id="exportInventoryCsv" class="button button-secondary" type="button">Exportar CSV</button></div>
+          <div id="inventoryTable" class="data-table-wrap"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section central-section" id="calendario">
+      <div class="container">
+        <div class="section-heading"><div><span class="eyebrow">Organização</span><h2>Calendário de tarefas e obrigações</h2></div><p>Cadastre lembretes manuais de vencimentos, pagamentos ou tarefas. O site não gera prazos fiscais automaticamente.</p></div>
+        <div class="central-card">
+          <form id="taskForm" class="central-form-grid">
+            <div><label for="taskTitle">Tarefa ou lembrete</label><input id="taskTitle" required maxlength="160" placeholder="Ex.: Conferir vencimento de tributo"></div>
+            <div><label for="taskDate">Data</label><input id="taskDate" type="date" required></div>
+            <div><label for="taskCategory">Categoria</label><select id="taskCategory"><option>Fiscal</option><option>Financeiro</option><option>Estoque</option><option>Administrativo</option><option>Outro</option></select></div>
+            <div class="form-action"><button class="button button-primary" type="submit">Adicionar lembrete</button></div>
+          </form>
+          <div id="taskList" class="task-list"></div>
+          <p class="source-note">Confirme os vencimentos nas fontes oficiais aplicáveis ao seu negócio. O calendário guarda lembretes, mas não envia notificações fora do site.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section central-section" id="backup">
+      <div class="container">
+        <div class="section-heading"><div><span class="eyebrow">Proteção dos dados</span><h2>Backup e restauração</h2></div><p>Baixe uma cópia dos registros locais do Ferramenta Fácil ou restaure um backup anteriormente exportado.</p></div>
+        <div class="central-card backup-actions"><div><h3>Seus dados neste navegador</h3><p>Inclui os registros de fluxo de caixa, produtos e lembretes salvos pelos módulos deste projeto.</p><button id="downloadBackup" class="button button-primary" type="button">Baixar backup JSON</button></div><div><h3>Restaurar cópia</h3><p>Importar um backup substitui os registros locais correspondentes. Faça uma cópia atual antes de restaurar.</p><label class="button button-secondary file-button" for="backupFile">Selecionar backup JSON<input id="backupFile" type="file" accept=".json,application/json"></label><p id="backupStatus" class="status-message" aria-live="polite"></p></div></div>
+      </div>
+    </section>
+
+    <section class="section central-section" id="fontes">
+      <div class="container">
+        <div class="section-heading"><div><span class="eyebrow">Fontes de referência</span><h2>Portais oficiais úteis</h2></div><p>Atalhos para pesquisar tabelas e orientações nas fontes responsáveis.</p></div>
+        <div class="official-grid">
+          <a class="official-card" href="https://portalunico.siscomex.gov.br/classif/" target="_blank" rel="noopener noreferrer"><strong>Classif / NCM</strong><span>Tabela NCM, notas legais e decisões de classificação.</span></a>
+          <a class="official-card" href="https://www.nfe.fazenda.gov.br/portal/consulta.aspx/listaConteudo.aspx?AspxAutoDetectCookieSupport=1&tipoConteudo=%2FNJarYc9nus%3D" target="_blank" rel="noopener noreferrer"><strong>Portal da NF-e</strong><span>Tabelas e documentos técnicos da NF-e.</span></a>
+          <a class="official-card" href="https://www.confaz.fazenda.gov.br/" target="_blank" rel="noopener noreferrer"><strong>CONFAZ</strong><span>Convênios, protocolos e legislação acordada entre estados.</span></a>
+          <a class="official-card" href="https://www.gov.br/receitafederal/pt-br" target="_blank" rel="noopener noreferrer"><strong>Receita Federal</strong><span>Orientações tributárias e serviços federais.</span></a>
+          <a class="official-card" href="https://www.gov.br/empresas-e-negocios/pt-br/empreendedor" target="_blank" rel="noopener noreferrer"><strong>Portal do Empreendedor</strong><span>Orientações e serviços para MEI.</span></a>
+          <a class="official-card" href="https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul" target="_blank" rel="noopener noreferrer"><strong>Download oficial da NCM</strong><span>Arquivos JSON e XLSX da tabela vigente.</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-content"><a class="logo footer-logo" href="index.html">ferramenta<span>fácil</span><span class="logo-dot">.</span></a><p>Ferramentas simples para cuidar melhor do seu negócio.</p><nav class="footer-links" aria-label="Informações do site"><a href="sobre.html">Sobre</a><a href="contato.html">Contato</a><a href="privacidade.html">Política de Privacidade</a><a href="termos.html">Termos de Uso</a></nav><span>© <span id="centralYear"></span> Ferramenta Fácil</span></div></footer>
+</body>
+</html>

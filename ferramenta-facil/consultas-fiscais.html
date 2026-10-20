@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pesquise códigos fiscais, CFOPs, conceitos tributários e acesse fontes oficiais de NCM, CEST e documentos fiscais.">
+  <meta name="theme-color" content="#16794b">
+  <meta name="robots" content="index,follow">
+  <title>Consultas Fiscais | Ferramenta Fácil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/consultas-fiscais.js"></script>
+  <style>
+    .fiscal-hero { padding: 68px 0 42px; background: linear-gradient(135deg, #f2faf5, #ffffff); }
+    .fiscal-hero h1 { max-width: 820px; margin: 16px 0; font-family: Manrope, sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.12; letter-spacing: -0.04em; }
+    .fiscal-hero h1 span { color: #16794b; }
+    .fiscal-hero p { max-width: 720px; line-height: 1.75; color: #58645d; }
+    .fiscal-search-panel { margin-top: 28px; padding: 22px; background: #fff; border: 1px solid #e2e9e4; border-radius: 18px; box-shadow: 0 12px 35px rgba(20, 60, 35, .06); }
+    .fiscal-search-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(190px, 250px); gap: 12px; }
+    .fiscal-search-grid input, .fiscal-search-grid select { width: 100%; min-height: 48px; border: 1px solid #d7e0d9; border-radius: 10px; padding: 12px 14px; font: inherit; background: white; color: #17231b; }
+    .fiscal-search-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+    .fiscal-results-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
+    .fiscal-result-card { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 22px; border: 1px solid #e2e9e4; border-radius: 16px; background: #fff; }
+    .fiscal-result-card h3 { margin: 0; font-family: Manrope, sans-serif; font-size: 1.08rem; line-height: 1.45; color: #17231b; }
+    .fiscal-result-card p { margin: 0 0 6px; color: #58645d; line-height: 1.7; }
+    .fiscal-badge { display: inline-flex; padding: 5px 9px; border-radius: 99px; color: #176b43; background: #e9f7ee; font-size: .78rem; font-weight: 700; }
+    .fiscal-note { margin-top: 28px; padding: 20px; border-left: 4px solid #16794b; background: #f5f8f5; border-radius: 8px; color: #46534a; line-height: 1.7; }
+    .fiscal-note strong { color: #1c2b21; }
+    .fiscal-section { padding: 48px 0 68px; }
+    .fiscal-operation-panel{margin:30px 0;padding:24px;border:1px solid #e2e9e4;border-radius:16px;background:#fff}.fiscal-operation-panel h2{font-family:Manrope,sans-serif}.fiscal-operation-panel label{display:block;font-size:.9rem;font-weight:600;margin-bottom:6px}.fiscal-operation-panel p{line-height:1.65;color:#58645d}.fiscal-operation-panel .fiscal-search-grid{margin-top:18px}.fiscal-operation-panel .fiscal-search-grid>div{min-width:0}.fiscal-operation-panel input,.fiscal-operation-panel select{width:100%;min-height:46px;border:1px solid #d7e0d9;border-radius:9px;padding:10px;font:inherit}
+    .fiscal-empty { padding: 28px; text-align: center; color: #66736a; border: 1px dashed #cad6cd; border-radius: 14px; margin-top: 20px; }
+    .fiscal-back { display: inline-block; margin-top: 24px; color: #176b43; font-weight: 700; text-decoration: none; }
+    @media (max-width: 700px) { .fiscal-search-grid, .fiscal-results-grid { grid-template-columns: 1fr; } .fiscal-hero { padding-top: 44px; } .fiscal-search-panel { padding: 16px; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-content">
+      <a class="logo" href="index.html" aria-label="Ferramenta Fácil - início">ferramenta<span>fácil</span><span class="logo-dot">.</span></a>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="index.html#ferramentas">Ferramentas</a>
+        <a href="consultas-fiscais.html" aria-current="page">Consultas fiscais</a>
+        <a href="central-ferramentas.html">Central de pesquisa</a>
+        <a href="index.html#sobre">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="fiscal-hero">
+      <div class="container">
+        <span class="eyebrow"><span class="eyebrow-dot"></span> Central de consultas</span>
+        <h1>Encontre informações <span>fiscais sem complicação.</span></h1>
+        <p>Pesquise CFOPs e conceitos fiscais em linguagem simples. Para NCM, CEST e tabelas que exigem atualização oficial, acesse as fontes responsáveis diretamente.</p>
+        <div class="fiscal-search-panel">
+          <div class="fiscal-search-grid">
+            <input id="fiscalSearch" type="search" placeholder="Busque código, sigla ou descrição. Ex.: 5102, devolução, NCM" aria-label="Pesquisar informações fiscais">
+            <select id="fiscalCategory" aria-label="Filtrar categoria">
+              <option value="todos">Todas as categorias</option>
+              <option value="cfop">CFOPs selecionados</option>
+              <option value="conceitos">Conceitos fiscais</option>
+              <option value="fontes">Consultas oficiais</option>
+            </select>
+          </div>
+          <div class="fiscal-search-actions">
+            <span id="fiscalResultCount" aria-live="polite">Carregando resultados…</span>
+            <button class="button button-secondary" id="clearFiscalSearch" type="button">Limpar pesquisa</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fiscal-section">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">Resultados da pesquisa</span>
+            <h2>Consultas e explicações</h2>
+          </div>
+          <p>Os códigos abaixo são referências de uso comum. Confira sempre a operação real, o regime tributário e as regras aplicáveis antes de emitir um documento fiscal.</p>
+        </div>
+        <div id="fiscalResults" class="fiscal-results-grid"></div>
+        <div id="fiscalEmpty" class="fiscal-empty" hidden>Nenhum resultado encontrado. Tente outro código ou escolha “Todas as categorias”.</div>
+
+
+        <section class="fiscal-operation-panel" aria-labelledby="operationHeading">
+          <span class="eyebrow">Pesquisa orientada</span><h2 id="operationHeading">Pesquise uma operação comercial</h2>
+          <p>Informe o cenário para receber uma lista de pontos que precisam ser conferidos. Esta ferramenta não determina automaticamente a tributação.</p>
+          <form id="operationForm" class="fiscal-search-grid">
+            <div><label for="operationItem">Produto ou serviço</label><input id="operationItem" required maxlength="160" placeholder="Ex.: camiseta de algodão ou serviço de manutenção"></div>
+            <div><label for="operationType">Operação</label><select id="operationType"><option value="venda">Venda</option><option value="compra">Compra</option><option value="devolucao">Devolução</option><option value="transferencia">Transferência</option><option value="servico">Prestação de serviço</option><option value="remessa">Remessa/industrialização</option></select></div>
+            <div><label for="operationOrigin">UF de origem</label><input id="operationOrigin" maxlength="2" placeholder="Ex.: SP"></div>
+            <div><label for="operationDestination">UF de destino</label><input id="operationDestination" maxlength="2" placeholder="Ex.: MG"></div>
+            <div><label for="operationRegime">Regime tributário</label><select id="operationRegime"><option value="nao-informado">Não sei / não informado</option><option value="mei">MEI</option><option value="simples">Simples Nacional</option><option value="presumido">Lucro Presumido</option><option value="real">Lucro Real</option></select></div>
+            <div><label for="operationCustomer">Destinatário</label><select id="operationCustomer"><option value="nao-informado">Não informado</option><option value="consumidor">Consumidor final</option><option value="empresa">Outra empresa</option><option value="revenda">Empresa para revenda</option></select></div>
+            <div style="grid-column:1/-1"><button class="button button-primary" type="submit">Montar roteiro de consulta →</button></div>
+          </form>
+          <div id="operationResult" class="fiscal-note" hidden aria-live="polite"></div>
+        </section>
+
+        <div class="fiscal-note">
+          <strong>Importante:</strong> esta página é uma ferramenta de consulta e aprendizado, não substitui a validação fiscal/contábil. CFOP, NCM, CEST e CST não devem ser escolhidos apenas pelo nome do produto. A classificação depende de detalhes da mercadoria, da operação, do estado e do regime tributário.
+        </div>
+        <a class="fiscal-back" href="index.html">← Voltar para as ferramentas</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <a class="logo footer-logo" href="index.html">ferramenta<span>fácil</span><span class="logo-dot">.</span></a>
+      <p>Ferramentas simples para cuidar melhor do seu negócio.</p>
+      <span>© <span id="fiscalYear"></span> Ferramenta Fácil</span>
+      <nav class="footer-links" aria-label="Informações do site"><a href="sobre.html">Sobre</a><a href="contato.html">Contato</a><a href="privacidade.html">Política de Privacidade</a><a href="termos.html">Termos de Uso</a></nav>
+    </div>
+  </footer>
+</body>
+</html>

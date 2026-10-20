@@ -1,0 +1,623 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Calculadoras gratuitas de preço, lucro e margem, ferramentas de organização e consultas informativas para MEIs e pequenos comerciantes."
+  >
+
+  <meta name="theme-color" content="#16794b">
+  <meta name="robots" content="index,follow">
+
+  <title>Ferramenta Fácil | Ferramentas gratuitas para seu negócio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-content">
+      <a class="logo" href="#inicio" aria-label="Ferramenta Fácil - início">
+        ferramenta<span>fácil</span><span class="logo-dot">.</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="#ferramentas">Ferramentas</a>
+        <a href="consultas-fiscais.html">Consultas fiscais</a>
+        <a href="central-ferramentas.html">Central de pesquisa</a>
+        <a href="reforma-tributaria.html">Reforma Tributária</a>
+        <a href="#sobre">Sobre o projeto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-content">
+        <span class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          Simples, gratuito e prático
+        </span>
+
+        <h1>
+          Seu negócio merece<br>
+          <span>contas mais simples.</span>
+        </h1>
+
+        <p class="hero-description">
+          Ferramentas gratuitas para ajudar você a entender seus números,
+          tomar decisões e cuidar melhor do seu negócio.
+        </p>
+
+        <a class="button button-primary" href="#ferramentas">
+          Explorar ferramentas
+          <span aria-hidden="true">↓</span>
+        </a>
+
+        <div class="hero-benefits">
+          <span><span aria-hidden="true">✓</span> Sem cadastro</span>
+          <span><span aria-hidden="true">✓</span> Fácil de usar</span>
+          <span><span aria-hidden="true">✓</span> Feito para pequenos negócios</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="tools-section section" id="ferramentas">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">Nossas ferramentas</span>
+            <h2>Menos complicação.<br>Mais clareza no seu negócio.</h2>
+          </div>
+
+          <p>
+            Escolha o que precisa resolver. Vamos explicar cada etapa
+            para você não ficar com dúvidas.
+          </p>
+        </div>
+
+        <div class="search-wrapper">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="O que você precisa calcular?"
+            aria-label="Buscar ferramentas"
+          >
+
+          <kbd>/</kbd>
+        </div>
+
+        <div class="filter-list" aria-label="Filtrar ferramentas por categoria">
+          <button
+            class="filter-button active"
+            data-category="todas"
+            aria-pressed="true"
+          >
+            Todas
+          </button>
+
+          <button
+            class="filter-button"
+            data-category="financeiro"
+            aria-pressed="false"
+          >
+            Financeiro
+          </button>
+
+          <button
+            class="filter-button"
+            data-category="documentos"
+            aria-pressed="false"
+          >
+            Documentos
+          </button>
+
+          <button
+            class="filter-button"
+            data-category="organizacao"
+            aria-pressed="false"
+          >
+            Organização
+          </button>
+        </div>
+
+        <div class="tools-count" aria-live="polite">
+          <span id="toolsCount">14 ferramentas</span>
+        </div>
+
+        <div class="tools-grid" id="toolsGrid">
+
+          <article class="tool-card" data-category="organizacao" data-search="central de pesquisa Google fontes oficiais receita federal portal nfe XML nota fiscal estoque inventário calendário obrigações backup exportar CSV JSON" data-tool-target="central-ferramentas.html">
+            <div class="tool-icon icon-purple" aria-hidden="true">⌕</div><span class="tool-tag">Central</span><h3>Central de pesquisa e gestão</h3><p>Pesquise no Google e em fontes oficiais, leia XML, organize estoque, lembretes e backups locais.</p><a class="tool-link" href="central-ferramentas.html">Abrir central <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="tool-card" data-category="documentos" data-search="consultas fiscais NCM CFOP CEST CST CSOSN ICMS-ST legislação produto serviço operação" data-tool-target="consultas-fiscais.html">
+            <div class="tool-icon icon-green" aria-hidden="true">§</div><span class="tool-tag">Fiscal</span><h3>Consultas fiscais</h3><p>Pesquise códigos, conceitos, operações e fontes oficiais para conferir informações fiscais.</p><a class="tool-link" href="consultas-fiscais.html">Pesquisar informações <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="tool-card" data-category="financeiro" data-search="reforma tributária IBS CBS IS simulador impostos cronograma" data-tool-target="reforma-tributaria.html">
+            <div class="tool-icon icon-blue" aria-hidden="true">↻</div><span class="tool-tag">Tributação</span><h3>Reforma Tributária</h3><p>Entenda IBS, CBS, transição e faça uma simulação educativa com alíquotas informadas.</p><a class="tool-link" href="reforma-tributaria.html">Explorar reforma <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="tool-card" data-category="organizacao" data-search="guia prático MEI pequeno comerciante nota fiscal obrigações prazos documentos" data-tool-target="guia-pratico.html">
+            <div class="tool-icon icon-orange" aria-hidden="true">i</div><span class="tool-tag">Orientação</span><h3>Guia prático do comerciante</h3><p>Encontre explicações simples sobre MEI, documentos fiscais, preços e organização.</p><a class="tool-link" href="guia-pratico.html">Consultar o guia <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article
+            class="tool-card"
+            data-category="financeiro"
+            data-search="calculadora preço venda produto custo margem despesas"
+            data-tool-target="#calculadora"
+          >
+            <div class="tool-icon icon-green" aria-hidden="true">R$</div>
+
+            <span class="tool-tag">Financeiro</span>
+
+            <h3>Calculadora de preço</h3>
+
+            <p>
+              Descubra quanto cobrar pelo seu produto considerando custos,
+              despesas e margem desejada.
+            </p>
+
+            <button class="tool-link" id="openCalculator" type="button">
+              Calcular preço <span aria-hidden="true">→</span>
+            </button>
+          </article>
+
+          <article
+            class="tool-card"
+            data-category="financeiro"
+            data-search="lucro margem ganho venda custo despesas"
+            data-tool-target="#lucro-margem"
+          >
+            <div class="tool-icon icon-blue" aria-hidden="true">%</div>
+
+            <span class="tool-tag">Financeiro</span>
+
+            <h3>Lucro e margem</h3>
+
+            <p>
+              Entenda quanto realmente sobra de uma venda depois de descontar
+              seus custos e despesas.
+            </p>
+
+            <button class="tool-link" id="openProfitCalculator" type="button">
+              Calcular lucro <span aria-hidden="true">→</span>
+            </button>
+          </article>
+
+
+          <article class="tool-card" data-category="financeiro" data-search="desconto acrescimo promoção preço final economia aumento percentual" data-tool-target="#desconto-acrescimo">
+            <div class="tool-icon icon-orange" aria-hidden="true">%</div>
+            <span class="tool-tag">Financeiro</span>
+            <h3>Desconto e acréscimo</h3>
+            <p>Calcule o preço final de uma promoção ou aplique um aumento percentual.</p>
+            <button class="tool-link" type="button" data-scroll-target="#desconto-acrescimo">Calcular valor <span aria-hidden="true">→</span></button>
+          </article>
+
+          <article class="tool-card" data-category="financeiro" data-search="comissão vendedor vendas percentual comissão comercial" data-tool-target="#comissao">
+            <div class="tool-icon icon-blue" aria-hidden="true">R$</div>
+            <span class="tool-tag">Financeiro</span>
+            <h3>Calculadora de comissão</h3>
+            <p>Descubra o valor da comissão com base nas vendas realizadas.</p>
+            <button class="tool-link" type="button" data-scroll-target="#comissao">Calcular comissão <span aria-hidden="true">→</span></button>
+          </article>
+
+          <article class="tool-card" data-category="financeiro" data-search="markup multiplicador custo preço venda produto" data-tool-target="#markup">
+            <div class="tool-icon icon-green" aria-hidden="true">×</div>
+            <span class="tool-tag">Financeiro</span>
+            <h3>Calculadora de markup</h3>
+            <p>Estime um preço de venda aplicando um percentual sobre o custo.</p>
+            <button class="tool-link" type="button" data-scroll-target="#markup">Calcular markup <span aria-hidden="true">→</span></button>
+          </article>
+
+          <article class="tool-card" data-category="financeiro" data-search="custo médio estoque compra mercadoria quantidade preço" data-tool-target="#custo-medio">
+            <div class="tool-icon icon-purple" aria-hidden="true">÷</div>
+            <span class="tool-tag">Financeiro</span>
+            <h3>Custo médio de produtos</h3>
+            <p>Combine duas compras para estimar o custo médio ponderado por unidade.</p>
+            <button class="tool-link" type="button" data-scroll-target="#custo-medio">Calcular custo médio <span aria-hidden="true">→</span></button>
+          </article>
+
+          <article class="tool-card" data-category="financeiro" data-search="ponto equilíbrio custos fixos variável vendas quantidade cobrir despesas" data-tool-target="#ponto-equilibrio">
+            <div class="tool-icon icon-orange" aria-hidden="true">◎</div>
+            <span class="tool-tag">Financeiro</span>
+            <h3>Ponto de equilíbrio</h3>
+            <p>Estime quantas unidades vender para cobrir custos fixos e variáveis.</p>
+            <button class="tool-link" type="button" data-scroll-target="#ponto-equilibrio">Calcular ponto <span aria-hidden="true">→</span></button>
+          </article>
+
+          <article class="tool-card" data-category="financeiro" data-search="meta vendas objetivo lucro unidades quanto vender" data-tool-target="#meta-vendas">
+            <div class="tool-icon icon-blue" aria-hidden="true">↗</div>
+            <span class="tool-tag">Financeiro</span>
+            <h3>Meta de vendas</h3>
+            <p>Calcule quantas unidades vender para atingir uma meta de lucro.</p>
+            <button class="tool-link" type="button" data-scroll-target="#meta-vendas">Calcular meta <span aria-hidden="true">→</span></button>
+          </article>
+
+          <article class="tool-card" data-category="documentos" data-search="gerador recibo comprovante pagamento serviço cliente imprimir" data-tool-target="#gerador-recibo">
+            <div class="tool-icon icon-orange" aria-hidden="true">▤</div>
+            <span class="tool-tag">Documentos</span>
+            <h3>Gerador de recibos</h3>
+            <p>Preencha os dados e gere um recibo simples para imprimir ou salvar em PDF.</p>
+            <button class="tool-link" type="button" data-scroll-target="#gerador-recibo">Criar recibo <span aria-hidden="true">→</span></button>
+          </article>
+
+          <article class="tool-card" data-category="organizacao" data-search="fluxo caixa controle financeiro entradas saídas saldo receitas despesas" data-tool-target="#fluxo-caixa">
+            <div class="tool-icon icon-purple" aria-hidden="true">↔</div>
+            <span class="tool-tag">Organização</span>
+            <h3>Fluxo de caixa simples</h3>
+            <p>Registre entradas e saídas e acompanhe o saldo durante esta sessão.</p>
+            <button class="tool-link" type="button" data-scroll-target="#fluxo-caixa">Controlar caixa <span aria-hidden="true">→</span></button>
+          </article>
+
+        </div>
+
+        <p class="empty-state" id="emptyState" hidden>
+          Não encontramos ferramentas com esse termo. Tente outra palavra.
+        </p>
+      </div>
+    </section>
+
+    <section class="calculator-section section" id="calculadora">
+      <div class="container calculator-layout">
+        <div class="calculator-intro">
+          <span class="eyebrow">Ferramenta gratuita</span>
+
+          <h2>Descubra quanto cobrar pelo seu produto.</h2>
+
+          <p>
+            Informe o custo, estime suas despesas e escolha a margem que
+            deseja obter. Nós fazemos as contas para você.
+          </p>
+
+          <div class="help-note">
+            <span aria-hidden="true">i</span>
+
+            <p>
+              <strong>O que é margem?</strong><br>
+              É a parte do preço de venda que representa o lucro depois
+              de descontar os custos e as despesas considerados no cálculo.
+            </p>
+          </div>
+        </div>
+
+        <div class="calculator-card">
+          <div class="calculator-card-heading">
+            <div>
+              <span class="step-label">CALCULADORA DE PREÇO</span>
+              <h3>Vamos fazer as contas</h3>
+            </div>
+
+            <span class="calculator-symbol" aria-hidden="true">÷</span>
+          </div>
+
+          <form id="priceForm">
+            <div class="form-field">
+              <label for="cost">Quanto você paga pelo produto?</label>
+
+              <div class="input-with-prefix">
+                <span>R$</span>
+
+                <input
+                  id="cost"
+                  name="cost"
+                  type="number"
+                  min="0.01"
+                  step="0.01"
+                  placeholder="Ex.: 20,00"
+                  required
+                >
+              </div>
+
+              <small>O custo de compra ou produção de uma unidade.</small>
+            </div>
+
+            <div class="form-field">
+              <label for="expenses">Despesas sobre a venda (%)</label>
+
+              <div class="input-with-suffix">
+                <input
+                  id="expenses"
+                  name="expenses"
+                  type="number"
+                  min="0"
+                  max="99.99"
+                  step="0.01"
+                  value="10"
+                  required
+                >
+
+                <span>%</span>
+              </div>
+
+              <small>Ex.: taxas de venda e despesas proporcionais.</small>
+            </div>
+
+            <div class="form-field">
+              <label for="margin">Margem de lucro desejada (%)</label>
+
+              <div class="input-with-suffix">
+                <input
+                  id="margin"
+                  name="margin"
+                  type="number"
+                  min="0"
+                  max="99.99"
+                  step="0.01"
+                  value="20"
+                  required
+                >
+
+                <span>%</span>
+              </div>
+
+              <small>Quanto do preço final você deseja que seja lucro.</small>
+            </div>
+
+            <p class="form-error" id="priceError" role="alert" hidden></p>
+
+            <button class="button button-primary button-full" type="submit">
+              Calcular preço de venda
+              <span aria-hidden="true">→</span>
+            </button>
+          </form>
+
+          <div class="result-box" id="resultBox" aria-live="polite" hidden>
+            <span class="result-label">PREÇO DE VENDA SUGERIDO</span>
+
+            <strong class="result-price" id="resultPrice">R$ 0,00</strong>
+
+            <div class="result-divider"></div>
+
+            <div class="result-row">
+              <span>Custo do produto</span>
+              <strong id="resultCost">R$ 0,00</strong>
+            </div>
+
+            <div class="result-row">
+              <span>Despesas estimadas</span>
+              <strong id="resultExpenses">R$ 0,00</strong>
+            </div>
+
+            <div class="result-row result-profit">
+              <span>Lucro estimado</span>
+              <strong id="resultProfit">R$ 0,00</strong>
+            </div>
+
+            <p class="result-explanation" id="priceExplanation"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="calculator-section profit-section section"
+      id="lucro-margem"
+    >
+      <div class="container calculator-layout">
+        <div class="calculator-intro">
+          <span class="eyebrow">Entenda seus resultados</span>
+
+          <h2>Quanto realmente sobra de cada venda?</h2>
+
+          <p>
+            Se você já sabe por quanto vendeu, informe o valor da venda,
+            o custo e as despesas. Vamos mostrar o lucro e a margem obtidos.
+          </p>
+
+          <div class="help-note">
+            <span aria-hidden="true">i</span>
+
+            <p>
+              <strong>Não é a mesma coisa que faturamento.</strong><br>
+              O faturamento é o valor vendido. O lucro é o que sobra
+              depois de descontar os custos e as despesas informados.
+            </p>
+          </div>
+        </div>
+
+        <div class="calculator-card">
+          <div class="calculator-card-heading">
+            <div>
+              <span class="step-label">CALCULADORA DE LUCRO</span>
+              <h3>Confira sua venda</h3>
+            </div>
+
+            <span class="calculator-symbol" aria-hidden="true">%</span>
+          </div>
+
+          <form id="profitForm">
+            <div class="form-field">
+              <label for="salePrice">Por quanto você vendeu?</label>
+
+              <div class="input-with-prefix">
+                <span>R$</span>
+
+                <input
+                  id="salePrice"
+                  name="salePrice"
+                  type="number"
+                  min="0.01"
+                  step="0.01"
+                  placeholder="Ex.: 50,00"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="productCost">Quanto o produto custou?</label>
+
+              <div class="input-with-prefix">
+                <span>R$</span>
+
+                <input
+                  id="productCost"
+                  name="productCost"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  placeholder="Ex.: 20,00"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="saleExpenses">Outras despesas dessa venda (R$)</label>
+
+              <div class="input-with-prefix">
+                <span>R$</span>
+
+                <input
+                  id="saleExpenses"
+                  name="saleExpenses"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value="0"
+                  required
+                >
+              </div>
+
+              <small>Ex.: taxa da maquininha ou frete pago por você.</small>
+            </div>
+
+            <p class="form-error" id="profitError" role="alert" hidden></p>
+
+            <button class="button button-primary button-full" type="submit">
+              Descobrir meu lucro
+              <span aria-hidden="true">→</span>
+            </button>
+          </form>
+
+          <div
+            class="result-box"
+            id="profitResultBox"
+            aria-live="polite"
+            hidden
+          >
+            <span class="result-label">RESULTADO DA VENDA</span>
+
+            <strong class="result-price" id="profitResult">R$ 0,00</strong>
+
+            <p id="profitStatus" class="result-status"></p>
+
+            <div class="result-divider"></div>
+
+            <div class="result-row">
+              <span>Margem sobre a venda</span>
+              <strong id="profitMargin">0%</strong>
+            </div>
+
+            <div class="result-row">
+              <span>Custo do produto</span>
+              <strong id="profitCostResult">R$ 0,00</strong>
+            </div>
+
+            <div class="result-row">
+              <span>Outras despesas</span>
+              <strong id="profitExpensesResult">R$ 0,00</strong>
+            </div>
+
+            <p class="result-explanation" id="profitExplanation"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="calculator-section section extra-tools-section" id="desconto-acrescimo">
+      <div class="container calculator-layout">
+        <div class="calculator-intro"><span class="eyebrow">Preço promocional</span><h2>Calcule desconto ou acréscimo.</h2><p>Informe o preço original e o percentual para descobrir o valor final e a diferença em reais.</p><div class="help-note"><span aria-hidden="true">i</span><p><strong>Como funciona?</strong><br>Desconto reduz o preço; acréscimo aumenta o preço. O cálculo não considera taxas adicionais.</p></div></div>
+        <div class="calculator-card"><div class="calculator-card-heading"><div><span class="step-label">DESCONTO E ACRÉSCIMO</span><h3>Preço final</h3></div><span class="calculator-symbol">%</span></div>
+          <form id="discountForm"><div class="form-field"><label for="discountBase">Preço original (R$)</label><div class="input-with-prefix"><span>R$</span><input id="discountBase" type="number" min="0.01" step="0.01" required placeholder="Ex.: 100,00"></div></div>
+          <div class="form-field"><label for="discountPercent">Percentual (%)</label><input id="discountPercent" type="number" min="0" max="1000" step="0.01" required value="10"></div>
+          <div class="form-field"><label for="discountMode">Tipo de cálculo</label><select id="discountMode" required><option value="discount">Desconto</option><option value="increase">Acréscimo</option></select></div><p class="form-error" id="discountError" role="alert" hidden></p><button class="button button-primary button-full" type="submit">Calcular preço final →</button></form>
+          <div class="result-box" id="discountResultBox" aria-live="polite" hidden><span class="result-label">PREÇO FINAL</span><strong class="result-price" id="discountFinal">R$ 0,00</strong><div class="result-row"><span>Diferença</span><strong id="discountDifference">R$ 0,00</strong></div><p class="result-explanation" id="discountExplanation"></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="calculator-section profit-section section extra-tools-section" id="comissao">
+      <div class="container calculator-layout"><div class="calculator-intro"><span class="eyebrow">Vendas</span><h2>Quanto pagar de comissão?</h2><p>Calcule a comissão com base no valor total vendido e na taxa acordada.</p><div class="help-note"><span aria-hidden="true">i</span><p><strong>Importante</strong><br>Use o percentual previsto no acordo comercial. Este cálculo não define regras trabalhistas ou contratuais.</p></div></div>
+        <div class="calculator-card"><div class="calculator-card-heading"><div><span class="step-label">COMISSÃO</span><h3>Calcular comissão</h3></div><span class="calculator-symbol">R$</span></div><form id="commissionForm"><div class="form-field"><label for="commissionSales">Total de vendas (R$)</label><div class="input-with-prefix"><span>R$</span><input id="commissionSales" type="number" min="0" step="0.01" required placeholder="Ex.: 5000"></div></div><div class="form-field"><label for="commissionRate">Comissão (%)</label><div class="input-with-suffix"><input id="commissionRate" type="number" min="0" max="100" step="0.01" required value="5"><span>%</span></div></div><p class="form-error" id="commissionError" role="alert" hidden></p><button class="button button-primary button-full" type="submit">Calcular comissão →</button></form><div class="result-box" id="commissionResultBox" aria-live="polite" hidden><span class="result-label">COMISSÃO ESTIMADA</span><strong class="result-price" id="commissionResult">R$ 0,00</strong><div class="result-row"><span>Valor após comissão</span><strong id="commissionNet">R$ 0,00</strong></div></div></div>
+      </div>
+    </section>
+
+    <section class="calculator-section section extra-tools-section" id="markup"><div class="container calculator-layout"><div class="calculator-intro"><span class="eyebrow">Formação de preço</span><h2>Estime o preço usando markup.</h2><p>Multiplique o custo por um fator baseado no percentual escolhido. O resultado é uma estimativa simples, não uma análise completa de margem.</p></div><div class="calculator-card"><div class="calculator-card-heading"><div><span class="step-label">MARKUP SIMPLES</span><h3>Preço sugerido</h3></div><span class="calculator-symbol">×</span></div><form id="markupForm"><div class="form-field"><label for="markupCost">Custo unitário (R$)</label><div class="input-with-prefix"><span>R$</span><input id="markupCost" type="number" min="0.01" step="0.01" required placeholder="Ex.: 25"></div></div><div class="form-field"><label for="markupRate">Markup sobre o custo (%)</label><div class="input-with-suffix"><input id="markupRate" type="number" min="0" max="10000" step="0.01" required value="50"><span>%</span></div></div><p class="form-error" id="markupError" role="alert" hidden></p><button class="button button-primary button-full" type="submit">Calcular preço →</button></form><div class="result-box" id="markupResultBox" aria-live="polite" hidden><span class="result-label">PREÇO SUGERIDO</span><strong class="result-price" id="markupPrice">R$ 0,00</strong><div class="result-row"><span>Acréscimo sobre o custo</span><strong id="markupGain">R$ 0,00</strong></div></div></div></div></section>
+
+    <section class="calculator-section profit-section section extra-tools-section" id="custo-medio"><div class="container calculator-layout"><div class="calculator-intro"><span class="eyebrow">Compras e estoque</span><h2>Calcule o custo médio de duas compras.</h2><p>Informe quantidades e custos unitários para calcular a média ponderada dos produtos comprados.</p></div><div class="calculator-card"><div class="calculator-card-heading"><div><span class="step-label">CUSTO MÉDIO</span><h3>Combinar compras</h3></div><span class="calculator-symbol">÷</span></div><form id="averageCostForm"><div class="form-field"><label for="purchaseQty1">Quantidade da compra 1</label><input id="purchaseQty1" type="number" min="0.01" step="0.01" required value="10"></div><div class="form-field"><label for="purchaseCost1">Custo unitário da compra 1 (R$)</label><div class="input-with-prefix"><span>R$</span><input id="purchaseCost1" type="number" min="0" step="0.01" required value="20"></div></div><div class="form-field"><label for="purchaseQty2">Quantidade da compra 2</label><input id="purchaseQty2" type="number" min="0.01" step="0.01" required value="5"></div><div class="form-field"><label for="purchaseCost2">Custo unitário da compra 2 (R$)</label><div class="input-with-prefix"><span>R$</span><input id="purchaseCost2" type="number" min="0" step="0.01" required value="24"></div></div><p class="form-error" id="averageCostError" role="alert" hidden></p><button class="button button-primary button-full" type="submit">Calcular custo médio →</button></form><div class="result-box" id="averageCostResultBox" aria-live="polite" hidden><span class="result-label">CUSTO MÉDIO UNITÁRIO</span><strong class="result-price" id="averageCostResult">R$ 0,00</strong><div class="result-row"><span>Quantidade total</span><strong id="averageTotalQty">0</strong></div><div class="result-row"><span>Custo total</span><strong id="averageTotalCost">R$ 0,00</strong></div></div></div></div></section>
+
+    <section class="calculator-section section extra-tools-section" id="ponto-equilibrio"><div class="container calculator-layout"><div class="calculator-intro"><span class="eyebrow">Planejamento financeiro</span><h2>Descubra seu ponto de equilíbrio.</h2><p>Estime quantas unidades precisam ser vendidas para cobrir os custos fixos, considerando o preço e o custo variável unitário.</p><div class="help-note"><span aria-hidden="true">i</span><p><strong>O que significa?</strong><br>É uma estimativa baseada nos valores informados. Não inclui custos que você deixar de registrar.</p></div></div><div class="calculator-card"><div class="calculator-card-heading"><div><span class="step-label">PONTO DE EQUILÍBRIO</span><h3>Unidades para cobrir custos</h3></div><span class="calculator-symbol">◎</span></div><form id="breakEvenForm"><div class="form-field"><label for="fixedCosts">Custos fixos do período (R$)</label><div class="input-with-prefix"><span>R$</span><input id="fixedCosts" type="number" min="0" step="0.01" required placeholder="Ex.: 1500"></div></div><div class="form-field"><label for="unitPrice">Preço de venda por unidade (R$)</label><div class="input-with-prefix"><span>R$</span><input id="unitPrice" type="number" min="0.01" step="0.01" required placeholder="Ex.: 50"></div></div><div class="form-field"><label for="variableCost">Custo variável por unidade (R$)</label><div class="input-with-prefix"><span>R$</span><input id="variableCost" type="number" min="0" step="0.01" required placeholder="Ex.: 25"></div></div><p class="form-error" id="breakEvenError" role="alert" hidden></p><button class="button button-primary button-full" type="submit">Calcular ponto de equilíbrio →</button></form><div class="result-box" id="breakEvenResultBox" aria-live="polite" hidden><span class="result-label">UNIDADES NECESSÁRIAS</span><strong class="result-price" id="breakEvenUnits">0 unidades</strong><div class="result-row"><span>Faturamento estimado</span><strong id="breakEvenRevenue">R$ 0,00</strong></div><p class="result-explanation" id="breakEvenExplanation"></p></div></div></div></section>
+
+    <section class="calculator-section profit-section section extra-tools-section" id="meta-vendas"><div class="container calculator-layout"><div class="calculator-intro"><span class="eyebrow">Metas comerciais</span><h2>Quantas unidades vender para atingir sua meta?</h2><p>Informe a meta de lucro e o lucro estimado por unidade para calcular uma quantidade mínima de vendas.</p></div><div class="calculator-card"><div class="calculator-card-heading"><div><span class="step-label">META DE VENDAS</span><h3>Planejar vendas</h3></div><span class="calculator-symbol">↗</span></div><form id="salesGoalForm"><div class="form-field"><label for="salesGoal">Meta de lucro (R$)</label><div class="input-with-prefix"><span>R$</span><input id="salesGoal" type="number" min="0.01" step="0.01" required placeholder="Ex.: 3000"></div></div><div class="form-field"><label for="profitPerUnit">Lucro estimado por unidade (R$)</label><div class="input-with-prefix"><span>R$</span><input id="profitPerUnit" type="number" min="0.01" step="0.01" required placeholder="Ex.: 15"></div></div><p class="form-error" id="salesGoalError" role="alert" hidden></p><button class="button button-primary button-full" type="submit">Calcular quantidade →</button></form><div class="result-box" id="salesGoalResultBox" aria-live="polite" hidden><span class="result-label">META DE VENDAS</span><strong class="result-price" id="salesGoalUnits">0 unidades</strong><div class="result-row"><span>Lucro estimado nessa quantidade</span><strong id="salesGoalTotal">R$ 0,00</strong></div></div></div></div></section>
+
+    <section class="calculator-section section extra-tools-section" id="gerador-recibo"><div class="container calculator-layout"><div class="calculator-intro"><span class="eyebrow">Documentos</span><h2>Gere um recibo simples.</h2><p>Preencha os dados para montar um recibo imprimível. Revise as informações antes de assinar ou entregar.</p><div class="help-note"><span aria-hidden="true">i</span><p><strong>Atenção</strong><br>Este é um modelo básico. Confira se ele atende à finalidade do seu negócio e às exigências aplicáveis.</p></div></div><div class="calculator-card"><div class="calculator-card-heading"><div><span class="step-label">GERADOR DE RECIBO</span><h3>Dados do recibo</h3></div><span class="calculator-symbol">▤</span></div><form id="receiptForm"><div class="form-field"><label for="receiptIssuer">Recebi de (nome)</label><input id="receiptIssuer" required maxlength="120" placeholder="Nome de quem pagou"></div><div class="form-field"><label for="receiptPayer">Recebedor (nome)</label><input id="receiptPayer" required maxlength="120" placeholder="Nome de quem recebeu"></div><div class="form-field"><label for="receiptAmount">Valor recebido (R$)</label><div class="input-with-prefix"><span>R$</span><input id="receiptAmount" type="number" min="0.01" step="0.01" required placeholder="Ex.: 250"></div></div><div class="form-field"><label for="receiptDescription">Referente a</label><input id="receiptDescription" required maxlength="240" placeholder="Ex.: prestação de serviço"></div><div class="form-field"><label for="receiptDate">Data</label><input id="receiptDate" type="date" required></div><div class="form-field"><label for="receiptLocation">Cidade (opcional)</label><input id="receiptLocation" maxlength="100" placeholder="Cidade/UF"></div><p class="form-error" id="receiptError" role="alert" hidden></p><button class="button button-primary button-full" type="submit">Gerar recibo →</button></form><div class="result-box" id="receiptResultBox" aria-live="polite" hidden><div id="receiptPreview" class="receipt-preview"></div><button class="button button-primary button-full" type="button" id="printReceipt">Imprimir / salvar em PDF</button></div></div></div></section>
+
+    <section class="calculator-section profit-section section extra-tools-section" id="fluxo-caixa"><div class="container calculator-layout"><div class="calculator-intro"><span class="eyebrow">Organização financeira</span><h2>Acompanhe entradas e saídas.</h2><p>Adicione movimentações e veja o saldo acumulado. Os dados ficam salvos apenas neste navegador, neste dispositivo; não são enviados para a nuvem.</p><div class="help-note"><span aria-hidden="true">i</span><p><strong>Controle simples</strong><br>Os dados ficam neste navegador e podem ser apagados se os dados do site forem removidos. Não substitui um sistema contábil; mantenha uma cópia dos registros importantes.</p></div></div><div class="calculator-card"><div class="calculator-card-heading"><div><span class="step-label">FLUXO DE CAIXA</span><h3>Nova movimentação</h3></div><span class="calculator-symbol">↔</span></div><form id="cashFlowForm"><div class="form-field"><label for="cashDescription">Descrição</label><input id="cashDescription" maxlength="100" required placeholder="Ex.: venda de produto"></div><div class="form-field"><label for="cashType">Tipo</label><select id="cashType"><option value="entrada">Entrada</option><option value="saida">Saída</option></select></div><div class="form-field"><label for="cashAmount">Valor (R$)</label><div class="input-with-prefix"><span>R$</span><input id="cashAmount" type="number" min="0.01" step="0.01" required placeholder="Ex.: 150"></div></div><button class="button button-primary button-full" type="submit">Adicionar movimentação +</button></form><div class="cash-summary" aria-live="polite"><div><span>Entradas</span><strong id="cashIncome">R$ 0,00</strong></div><div><span>Saídas</span><strong id="cashExpenses">R$ 0,00</strong></div><div><span>Saldo</span><strong id="cashBalance">R$ 0,00</strong></div></div><div class="cash-list-wrap"><h4>Movimentações</h4><ul id="cashMovementList" class="cash-movement-list"><li class="cash-empty">Nenhuma movimentação adicionada.</li></ul></div><button class="button button-secondary button-full" type="button" id="clearCashFlow">Limpar movimentações</button></div></div></section>
+
+    <section class="about-section section" id="sobre">
+      <div class="container about-content">
+        <span class="eyebrow">Sobre o Ferramenta Fácil</span>
+
+        <h2>Feito para facilitar,<br>não para complicar.</h2>
+
+        <p>
+          Acreditamos que cuidar de um negócio não precisa ser complicado.
+          Estamos criando ferramentas gratuitas, com explicações simples,
+          para ajudar MEIs e pequenos comerciantes a entender melhor seus números.
+        </p>
+
+        <div class="about-points">
+          <div>
+            <span aria-hidden="true">✓</span>
+            <strong>Fácil de entender</strong>
+            <p>Explicações sem complicação.</p>
+          </div>
+
+          <div>
+            <span aria-hidden="true">✓</span>
+            <strong>Prático no dia a dia</strong>
+            <p>Ferramentas para dúvidas reais.</p>
+          </div>
+
+          <div>
+            <span aria-hidden="true">✓</span>
+            <strong>Privacidade em primeiro lugar</strong>
+            <p>As calculadoras funcionam no navegador.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <a class="logo footer-logo" href="#inicio">
+        ferramenta<span>fácil</span><span class="logo-dot">.</span>
+      </a>
+
+      <p>Ferramentas simples para cuidar melhor do seu negócio.</p>
+
+      <span>© <span id="year"></span> Ferramenta Fácil</span>
+      <nav class="footer-links" aria-label="Informações do site"><a href="sobre.html">Sobre</a><a href="contato.html">Contato</a><a href="privacidade.html">Política de Privacidade</a><a href="termos.html">Termos de Uso</a></nav>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
