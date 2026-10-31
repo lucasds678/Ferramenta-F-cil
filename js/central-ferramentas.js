@@ -108,25 +108,58 @@ function initXmlReader() {
 }
 
 function initInventory() {
-  const form = $("#productForm"); let products = readArray(KEYS.inventory);
+  const form = $("#productForm");
+  let products = readArray(KEYS.inventory).map((p) => ({ ...p, minStock: Number(p.minStock) || 0 }));
+  const movementKey = "ferramentaFacil.stockMovements.v1";
+  let movements = readArray(movementKey);
+  const saveProducts = () => writeArray(KEYS.inventory, products);
+  const saveMovements = () => writeArray(movementKey, movements.slice(-500));
   const render = () => {
     const table = $("#inventoryTable");
     const summary = $("#inventorySummary");
-    const totalStockValue = products.reduce((sum, p) => sum + p.quantity * p.cost, 0);
-    summary.textContent = `${products.length} produto(s) • custo estimado do estoque: ${brl(totalStockValue)}`;
-    if (!products.length) { table.innerHTML = '<p class="empty-results">Nenhum produto cadastrado ainda.</p>'; return; }
-    table.innerHTML = `<table class="data-table"><thead><tr><th>Produto</th><th>Código</th><th>Qtd.</th><th>Custo unit.</th><th>Preço venda</th><th>Valor em estoque</th><th>Ação</th></tr></thead><tbody>${products.map((p) => `<tr><td>${escapeHtml(p.name)}</td><td>${escapeHtml(p.code || "—")}</td><td class="${p.quantity <= 2 ? "stock-low" : ""}">${p.quantity}</td><td>${brl(p.cost)}</td><td>${brl(p.price)}</td><td>${brl(p.quantity * p.cost)}</td><td><button class="small-button" type="button" data-delete-product="${p.id}">Excluir</button></td></tr>`).join("")}</tbody></table>`;
+    const totalStockValue = products.reduce((sum, p) => sum + Number(p.quantity || 0) * Number(p.cost || 0), 0);
+    const low = products.filter((p) => Number(p.quantity || 0) <= Number(p.minStock || 0));
+    summary.textContent = `${products.length} produto(s) • ${low.length} abaixo/no estoque mínimo • custo estimado: ${brl(totalStockValue)}`;
+    if (!products.length) { table.innerHTML = '<p class="empty-results">Nenhum produto cadastrado ainda.</p>'; }
+    else table.innerHTML = `<table class="data-table"><thead><tr><th>Produto</th><th>Código</th><th>Qtd.</th><th>Mínimo</th><th>Custo unit.</th><th>Preço venda</th><th>Valor em estoque</th><th>Ações</th></tr></thead><tbody>${products.map((p) => `<tr><td>${escapeHtml(p.name)}</td><td>${escapeHtml(p.code || "—")}</td><td class="${Number(p.quantity) <= Number(p.minStock || 0) ? "stock-low" : ""}">${Number(p.quantity).toLocaleString("pt-BR")}</td><td>${Number(p.minStock || 0).toLocaleString("pt-BR")}</td><td>${brl(p.cost)}</td><td>${brl(p.price)}</td><td>${brl(Number(p.quantity) * Number(p.cost))}</td><td><button class="small-button" type="button" data-edit-product="${p.id}">Editar</button> <button class="small-button" type="button" data-delete-product="${p.id}">Excluir</button></td></tr>`).join("")}</tbody></table>`;
+    const select = $("#movementProduct");
+    if (select) select.innerHTML = '<option value="">Selecione um produto</option>' + products.map((p) => `<option value="${p.id}">${escapeHtml(p.name)}${p.code ? ` (${escapeHtml(p.code)})` : ""} — saldo ${Number(p.quantity).toLocaleString("pt-BR")}</option>`).join("");
+    const history = $("#movementHistory");
+    if (history) history.innerHTML = movements.length ? `<table class="data-table"><thead><tr><th>Data</th><th>Produto</th><th>Tipo</th><th>Quantidade</th><th>Observação</th><th>Saldo após</th></tr></thead><tbody>${[...movements].reverse().slice(0,100).map((m) => `<tr><td>${escapeHtml(m.date)}</td><td>${escapeHtml(m.productName)}</td><td>${m.type === "in" ? "Entrada" : "Saída"}</td><td>${Number(m.quantity).toLocaleString("pt-BR")}</td><td>${escapeHtml(m.note || "—")}</td><td>${Number(m.balance).toLocaleString("pt-BR")}</td></tr>`).join("")}</tbody></table>` : '<p class="empty-results">Nenhuma movimentação registrada.</p>';
   };
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    products.push({ id: Date.now(), name: $("#productName").value.trim(), code: $("#productCode").value.trim(), quantity: Number($("#productQuantity").value), cost: Number($("#productCost").value), price: Number($("#productPrice").value) });
-    if (writeArray(KEYS.inventory, products)) { form.reset(); $("#productQuantity").value = "0"; $("#productCost").value = "0"; $("#productPrice").value = "0"; render(); }
+    const name = $("#productName").value.trim();
+    const code = $("#productCode").value.trim();
+    const quantity = Number($("#productQuantity").value), cost = Number($("#productCost").value), price = Number($("#productPrice").value), minStock = Number($("#productMin")?.value || 0);
+    if (!name || ![quantity,cost,price,minStock].every(Number.isFinite) || quantity < 0 || cost < 0 || price < 0 || minStock < 0) { alert("Confira os campos. Quantidades e valores não podem ser negativos."); return; }
+    if (code && products.some((p) => String(p.code || "").toLowerCase() === code.toLowerCase() && p.id !== Number(form.dataset.editId))) { alert("Já existe um produto com esse código."); return; }
+    const editId = Number(form.dataset.editId);
+    if (editId) {
+      const old = products.find((p) => Number(p.id) === editId);
+      if (old) Object.assign(old, { name, code, quantity, cost, price, minStock });
+      delete form.dataset.editId;
+      const submit = form.querySelector('button[type="submit"]'); if (submit) submit.textContent = "Cadastrar produto";
+    } else products.push({ id: Date.now(), name, code, quantity, cost, price, minStock });
+    if (saveProducts()) { form.reset(); $("#productQuantity").value = "0"; $("#productCost").value = "0"; $("#productPrice").value = "0"; if ($("#productMin")) $("#productMin").value = "0"; render(); }
   });
-  $("#inventoryTable").addEventListener("click", (event) => { const button = event.target.closest("[data-delete-product]"); if (!button) return; products = products.filter((p) => p.id !== Number(button.dataset.deleteProduct)); writeArray(KEYS.inventory, products); render(); });
-  $("#exportInventoryCsv").addEventListener("click", () => downloadFile("estoque-ferramenta-facil.csv", toCsv([["Produto", "Código", "Quantidade", "Custo unitário", "Preço venda", "Valor em estoque"], ...products.map((p) => [p.name, p.code, p.quantity, p.cost, p.price, p.quantity * p.cost])]), "text/csv;charset=utf-8"));
+  $("#inventoryTable").addEventListener("click", (event) => {
+    const edit = event.target.closest("[data-edit-product]");
+    if (edit) { const p = products.find((item) => Number(item.id) === Number(edit.dataset.editProduct)); if (!p) return; $("#productName").value=p.name; $("#productCode").value=p.code||""; $("#productQuantity").value=p.quantity; $("#productCost").value=p.cost; $("#productPrice").value=p.price; if ($("#productMin")) $("#productMin").value=p.minStock||0; form.dataset.editId=p.id; const submit=form.querySelector('button[type="submit"]'); if(submit)submit.textContent="Salvar alterações"; form.scrollIntoView({behavior:"smooth",block:"center"}); return; }
+    const del = event.target.closest("[data-delete-product]"); if (!del) return; const id=Number(del.dataset.deleteProduct); const prod=products.find(p=>Number(p.id)===id); if(!prod)return; if(!confirm(`Excluir o produto “${prod.name}”? O histórico de movimentações será mantido.`))return; products=products.filter(p=>Number(p.id)!==id); if(saveProducts())render();
+  });
+  $("#exportInventoryCsv").addEventListener("click", () => downloadFile("estoque-ferramenta-facil.csv", toCsv([["Produto", "Código", "Quantidade", "Estoque mínimo", "Custo unitário", "Preço venda", "Valor em estoque"], ...products.map((p) => [p.name, p.code, p.quantity, p.minStock||0, p.cost, p.price, p.quantity * p.cost])]), "text/csv;charset=utf-8"));
+  $("#exportMovementsCsv")?.addEventListener("click", () => downloadFile("movimentos-estoque-ferramenta-facil.csv", toCsv([["Data", "Produto", "Tipo", "Quantidade", "Observação", "Saldo após"], ...movements.map((m) => [m.date, m.productName, m.type === "in" ? "Entrada" : "Saída", m.quantity, m.note || "", m.balance])]), "text/csv;charset=utf-8"));
+  const moveForm = $("#stockMovementForm");
+  if (moveForm) moveForm.addEventListener("submit", (event) => {
+    event.preventDefault(); const id=Number($("#movementProduct").value), type=$("#movementType").value, qty=Number($("#movementQty").value), product=products.find(p=>Number(p.id)===id);
+    if(!product || !Number.isFinite(qty) || qty<=0){$("#movementStatus").textContent="Selecione um produto e informe uma quantidade maior que zero.";return;}
+    const next=Number(product.quantity)+(type==="in"?qty:-qty); if(next<0){$("#movementStatus").textContent="Saída não registrada: o saldo ficaria negativo.";return;}
+    product.quantity=Number(next.toFixed(4)); const m={id:Date.now(),date:new Date().toLocaleString("pt-BR"),productId:id,productName:product.name,type,quantity:qty,note:$("#movementNote").value.trim(),balance:product.quantity};
+    if(saveProducts()){movements.push(m);if(saveMovements()){$("#movementStatus").textContent=`Movimento registrado. Novo saldo: ${product.quantity.toLocaleString("pt-BR")}.`;moveForm.reset();render();}else {movements.pop();product.quantity=Number((next+(type==="in"?-qty:qty)).toFixed(4));saveProducts();}}
+  });
   render();
 }
-
 function initTasks() {
   const form = $("#taskForm"); let tasks = readArray(KEYS.tasks);
   $("#taskDate").value = new Date().toISOString().slice(0, 10);
@@ -147,22 +180,27 @@ function downloadFile(filename, content, type) {
 }
 function toCsv(rows) { return "\uFEFF" + rows.map((row) => row.map((value) => `"${String(value ?? "").replace(/"/g, '""')}"`).join(";")).join("\r\n"); }
 function initBackup() {
+  const movementKey = "ferramentaFacil.stockMovements.v1";
+  const allKeys = [...Object.values(KEYS), movementKey, "ferramentaFacil.favorites.v1", "ferramentaFacil.recent.v1"];
   $("#downloadBackup").addEventListener("click", () => {
-    const data = { app: "Ferramenta Fácil", version: 1, exportedAt: new Date().toISOString(), data: {} };
-    for (const key of Object.values(KEYS)) { try { data.data[key] = JSON.parse(localStorage.getItem(key) || "[]"); } catch { data.data[key] = []; } }
+    const data = { app: "Ferramenta Fácil", version: 2, exportedAt: new Date().toISOString(), data: {} };
+    for (const key of allKeys) { try { const value=JSON.parse(localStorage.getItem(key)||"[]");data.data[key]=Array.isArray(value)?value:[]; } catch { data.data[key]=[]; } }
     downloadFile(`backup-ferramenta-facil-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify(data, null, 2), "application/json");
-    $("#backupStatus").textContent = "Backup gerado. Guarde o arquivo em local seguro.";
+    $("#backupStatus").textContent = "Backup gerado. Guarde o arquivo em local seguro; ele contém dados do seu negócio.";
   });
   $("#backupFile").addEventListener("change", async (event) => {
-    const file = event.target.files?.[0]; if (!file) return;
+    const file=event.target.files?.[0];if(!file)return;
     try {
-      const backup = JSON.parse(await file.text());
-      if (backup.app !== "Ferramenta Fácil" || !backup.data || typeof backup.data !== "object") throw new Error("Este arquivo não parece ser um backup válido do Ferramenta Fácil.");
-      if (!confirm("Restaurar este backup substituirá os dados locais de fluxo de caixa, estoque e lembretes. Deseja continuar?")) return;
-      for (const key of Object.values(KEYS)) { if (Array.isArray(backup.data[key])) localStorage.setItem(key, JSON.stringify(backup.data[key])); }
-      $("#backupStatus").textContent = "Backup restaurado. Atualize a página para atualizar todas as telas.";
-    } catch (error) { $("#backupStatus").textContent = error.message || "Não foi possível importar o backup."; }
-    event.target.value = "";
+      if(file.size>10*1024*1024)throw new Error("O arquivo excede o limite de 10 MB.");
+      const backup=JSON.parse(await file.text());
+      if(backup.app!=="Ferramenta Fácil"||!backup.data||typeof backup.data!=="object"||Array.isArray(backup.data))throw new Error("Este arquivo não parece ser um backup válido do Ferramenta Fácil.");
+      for(const key of allKeys){if(backup.data[key]!==undefined&&!Array.isArray(backup.data[key]))throw new Error(`O campo ${key} está inválido. Nenhum dado foi alterado.`);}
+      if(!confirm("Restaurar este backup substituirá os dados locais incluídos no arquivo. Recomendamos baixar um backup atual antes. Deseja continuar?"))return;
+      const previous={};for(const key of allKeys)previous[key]=localStorage.getItem(key);
+      try{for(const key of allKeys){if(Array.isArray(backup.data[key]))localStorage.setItem(key,JSON.stringify(backup.data[key]));}$("#backupStatus").textContent="Backup restaurado. Atualize a página para recarregar as listas.";}
+      catch(error){for(const key of allKeys){if(previous[key]===null)localStorage.removeItem(key);else localStorage.setItem(key,previous[key]);}throw error;}
+    }catch(error){$("#backupStatus").textContent=error.message||"Não foi possível importar o backup.";}
+    finally{event.target.value="";}
   });
 }
 function initFooter() { const year = $("#centralYear"); if (year) year.textContent = new Date().getFullYear(); }

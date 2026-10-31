@@ -2,6 +2,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6340308926995604"
+         crossorigin="anonymous"></script>
+    <!-- Fim do Google AdSense -->
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,6 +17,7 @@
 
   <meta name="theme-color" content="#16794b">
   <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://ferramenta-facil.pages.dev/">
 
   <title>Ferramenta Fácil | Ferramentas gratuitas para seu negócio</title>
 
@@ -40,7 +46,7 @@
         <a href="central-ferramentas.html">Central de pesquisa</a>
         <a href="reforma-tributaria.html">Reforma Tributária</a>
         <a href="#sobre">Sobre o projeto</a>
-      </nav>
+      <a href="financeiro.html">Financeiro</a><a href="estoque.html">Estoque</a><a href="documentos.html">Documentos</a><a href="utilitarios.html">Utilitários</a><a href="ferramentas-extras.html">Mais ferramentas</a><a href="gestao.html">Gestão</a></nav>
     </div>
   </header>
 
@@ -137,7 +143,7 @@
         </div>
 
         <div class="tools-count" aria-live="polite">
-          <span id="toolsCount">14 ferramentas</span>
+          <span id="toolsCount">Carregando ferramentas…</span>
         </div>
 
         <div class="tools-grid" id="toolsGrid">
@@ -255,6 +261,8 @@
             <p>Preencha os dados e gere um recibo simples para imprimir ou salvar em PDF.</p>
             <button class="tool-link" type="button" data-scroll-target="#gerador-recibo">Criar recibo <span aria-hidden="true">→</span></button>
           </article>
+
+          <article class="tool-card" data-category="organizacao" data-search="taxa cartão parcelamento contador texto gerador senha conversor unidades csv pdf qr code" data-tool-target="ferramentas-extras.html"><div class="tool-icon icon-purple" aria-hidden="true">✦</div><span class="tool-tag">Utilitários</span><h3>Mais ferramentas gratuitas</h3><p>Calcule taxas de cartão, simule parcelas, conte texto, gere senhas, converta unidades, leia CSV e crie QR Codes.</p><a class="tool-link" href="ferramentas-extras.html">Abrir ferramentas <span aria-hidden="true">→</span></a></article>
 
           <article class="tool-card" data-category="organizacao" data-search="fluxo caixa controle financeiro entradas saídas saldo receitas despesas" data-tool-target="#fluxo-caixa">
             <div class="tool-icon icon-purple" aria-hidden="true">↔</div>
@@ -568,7 +576,7 @@
 
     <section class="calculator-section section extra-tools-section" id="gerador-recibo"><div class="container calculator-layout"><div class="calculator-intro"><span class="eyebrow">Documentos</span><h2>Gere um recibo simples.</h2><p>Preencha os dados para montar um recibo imprimível. Revise as informações antes de assinar ou entregar.</p><div class="help-note"><span aria-hidden="true">i</span><p><strong>Atenção</strong><br>Este é um modelo básico. Confira se ele atende à finalidade do seu negócio e às exigências aplicáveis.</p></div></div><div class="calculator-card"><div class="calculator-card-heading"><div><span class="step-label">GERADOR DE RECIBO</span><h3>Dados do recibo</h3></div><span class="calculator-symbol">▤</span></div><form id="receiptForm"><div class="form-field"><label for="receiptIssuer">Recebi de (nome)</label><input id="receiptIssuer" required maxlength="120" placeholder="Nome de quem pagou"></div><div class="form-field"><label for="receiptPayer">Recebedor (nome)</label><input id="receiptPayer" required maxlength="120" placeholder="Nome de quem recebeu"></div><div class="form-field"><label for="receiptAmount">Valor recebido (R$)</label><div class="input-with-prefix"><span>R$</span><input id="receiptAmount" type="number" min="0.01" step="0.01" required placeholder="Ex.: 250"></div></div><div class="form-field"><label for="receiptDescription">Referente a</label><input id="receiptDescription" required maxlength="240" placeholder="Ex.: prestação de serviço"></div><div class="form-field"><label for="receiptDate">Data</label><input id="receiptDate" type="date" required></div><div class="form-field"><label for="receiptLocation">Cidade (opcional)</label><input id="receiptLocation" maxlength="100" placeholder="Cidade/UF"></div><p class="form-error" id="receiptError" role="alert" hidden></p><button class="button button-primary button-full" type="submit">Gerar recibo →</button></form><div class="result-box" id="receiptResultBox" aria-live="polite" hidden><div id="receiptPreview" class="receipt-preview"></div><button class="button button-primary button-full" type="button" id="printReceipt">Imprimir / salvar em PDF</button></div></div></div></section>
 
-    <section class="calculator-section profit-section section extra-tools-section" id="fluxo-caixa"><div class="container calculator-layout"><div class="calculator-intro"><span class="eyebrow">Organização financeira</span><h2>Acompanhe entradas e saídas.</h2><p>Adicione movimentações e veja o saldo acumulado. Os dados ficam salvos apenas neste navegador, neste dispositivo; não são enviados para a nuvem.</p><div class="help-note"><span aria-hidden="true">i</span><p><strong>Controle simples</strong><br>Os dados ficam neste navegador e podem ser apagados se os dados do site forem removidos. Não substitui um sistema contábil; mantenha uma cópia dos registros importantes.</p></div></div><div class="calculator-card"><div class="calculator-card-heading"><div><span class="step-label">FLUXO DE CAIXA</span><h3>Nova movimentação</h3></div><span class="calculator-symbol">↔</span></div><form id="cashFlowForm"><div class="form-field"><label for="cashDescription">Descrição</label><input id="cashDescription" maxlength="100" required placeholder="Ex.: venda de produto"></div><div class="form-field"><label for="cashType">Tipo</label><select id="cashType"><option value="entrada">Entrada</option><option value="saida">Saída</option></select></div><div class="form-field"><label for="cashAmount">Valor (R$)</label><div class="input-with-prefix"><span>R$</span><input id="cashAmount" type="number" min="0.01" step="0.01" required placeholder="Ex.: 150"></div></div><button class="button button-primary button-full" type="submit">Adicionar movimentação +</button></form><div class="cash-summary" aria-live="polite"><div><span>Entradas</span><strong id="cashIncome">R$ 0,00</strong></div><div><span>Saídas</span><strong id="cashExpenses">R$ 0,00</strong></div><div><span>Saldo</span><strong id="cashBalance">R$ 0,00</strong></div></div><div class="cash-list-wrap"><h4>Movimentações</h4><ul id="cashMovementList" class="cash-movement-list"><li class="cash-empty">Nenhuma movimentação adicionada.</li></ul></div><button class="button button-secondary button-full" type="button" id="clearCashFlow">Limpar movimentações</button></div></div></section>
+    <section class="calculator-section profit-section section extra-tools-section" id="fluxo-caixa"><div class="container calculator-layout"><div class="calculator-intro"><span class="eyebrow">Organização financeira</span><h2>Acompanhe entradas e saídas.</h2><p>Adicione movimentações e veja o saldo acumulado. Os dados ficam salvos apenas neste navegador, neste dispositivo; não são enviados para a nuvem.</p><div class="help-note"><span aria-hidden="true">i</span><p><strong>Controle simples</strong><br>Os dados ficam neste navegador e podem ser apagados se os dados do site forem removidos. Não substitui um sistema contábil; mantenha uma cópia dos registros importantes.</p></div></div><div class="calculator-card"><div class="calculator-card-heading"><div><span class="step-label">FLUXO DE CAIXA</span><h3>Nova movimentação</h3></div><span class="calculator-symbol">↔</span></div><form id="cashFlowForm"><div class="form-field"><label for="cashDescription">Descrição</label><input id="cashDescription" maxlength="100" required placeholder="Ex.: venda de produto"></div><div class="form-field"><label for="cashType">Tipo</label><select id="cashType"><option value="entrada">Entrada</option><option value="saida">Saída</option></select></div><div class="form-field"><label for="cashAmount">Valor (R$)</label><div class="input-with-prefix"><span>R$</span><input id="cashAmount" type="number" min="0.01" step="0.01" required placeholder="Ex.: 150"></div></div><button class="button button-primary button-full" type="submit">Adicionar movimentação +</button></form><div class="cash-summary" aria-live="polite"><div><span>Entradas</span><strong id="cashIncome">R$ 0,00</strong></div><div><span>Saídas</span><strong id="cashExpenses">R$ 0,00</strong></div><div><span>Saldo</span><strong id="cashBalance">R$ 0,00</strong></div></div><div class="cash-list-wrap"><h4>Movimentações</h4><ul id="cashMovementList" class="cash-movement-list"><li class="cash-empty">Nenhuma movimentação adicionada.</li></ul></div><button class="button button-secondary button-full" type="button" id="exportCashFlowCsv">Exportar movimentações CSV</button><button class="button button-secondary button-full" type="button" id="clearCashFlow">Limpar movimentações</button></div></div></section>
 
     <section class="about-section section" id="sobre">
       <div class="container about-content">

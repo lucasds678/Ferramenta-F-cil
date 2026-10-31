@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initSearch();
   initCategoryFilters();
+  initFavoritesAndRecent();
   initToolNavigation();
   initComingSoonMessages();
   initFooterYear();
@@ -79,7 +80,9 @@ function filterTools() {
     const matchesCategory =
       category === "todas" || card.dataset.category === category;
 
-    const visible = matchesSearch && matchesCategory;
+    const state = window.__ffToolMode?.();
+    const modeMatches = !state || state.mode === "all" || (state.mode === "favorites" ? state.favs.includes(card.dataset.toolId) : state.recents.includes(card.dataset.toolId));
+    const visible = matchesSearch && matchesCategory && modeMatches;
 
     card.hidden = !visible;
 
@@ -97,6 +100,7 @@ function filterTools() {
 
   if (emptyState) {
     emptyState.hidden = visibleCount > 0;
+    if (visibleCount === 0) emptyState.textContent = "Não encontramos ferramentas com esse termo ou filtro. Tente outra opção.";
   }
 }
 
@@ -148,6 +152,32 @@ function initToolNavigation() {
   openProfitCalculator?.addEventListener("click", () => {
     scrollToSection("#lucro-margem");
   });
+}
+
+
+function initFavoritesAndRecent() {
+  const grid = document.querySelector("#toolsGrid");
+  if (!grid) return;
+  const favKey = "ferramentaFacil.favorites.v1";
+  const recentKey = "ferramentaFacil.recent.v1";
+  const get = (key) => { try { const x=JSON.parse(localStorage.getItem(key)||"[]"); return Array.isArray(x)?x:[]; } catch { return []; } };
+  const set = (key,value) => { try { localStorage.setItem(key,JSON.stringify(value)); } catch {} };
+  const cards = [...grid.querySelectorAll(".tool-card")];
+  cards.forEach((card,index)=>{
+    if(!card.dataset.toolId) card.dataset.toolId = card.dataset.toolTarget || card.querySelector("h3")?.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g,"-") || `tool-${index}`;
+    const btn=document.createElement("button");btn.type="button";btn.className="favorite-toggle";btn.setAttribute("aria-label","Adicionar aos favoritos");btn.title="Adicionar aos favoritos";btn.textContent="☆";
+    const update=()=>{const yes=get(favKey).includes(card.dataset.toolId);btn.textContent=yes?"★":"☆";btn.classList.toggle("is-favorite",yes);btn.setAttribute("aria-pressed",String(yes));btn.setAttribute("aria-label",yes?"Remover dos favoritos":"Adicionar aos favoritos");btn.title=yes?"Remover dos favoritos":"Adicionar aos favoritos";};
+    btn.addEventListener("click",e=>{e.stopPropagation();let fav=get(favKey);fav=fav.includes(card.dataset.toolId)?fav.filter(x=>x!==card.dataset.toolId):[...fav,card.dataset.toolId];set(favKey,fav);update();if(mode==="favorites")applyMode();});
+    card.appendChild(btn);update();
+    card.addEventListener("click",()=>{const r=get(recentKey).filter(x=>x!==card.dataset.toolId);r.unshift(card.dataset.toolId);set(recentKey,r.slice(0,8));});
+  });
+  const bar=document.createElement("div");bar.className="tool-view-controls";bar.innerHTML='<button type="button" data-view="all" class="active" aria-pressed="true">Todas</button><button type="button" data-view="favorites" aria-pressed="false">★ Favoritas</button><button type="button" data-view="recent" aria-pressed="false">Recentes</button>';
+  grid.parentElement.insertBefore(bar,grid);
+  let mode="all";
+  function applyMode(){bar.querySelectorAll("button").forEach(b=>{const active=b.dataset.view===mode;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active));});const ids=mode==="favorites"?get(favKey):mode==="recent"?get(recentKey):null;cards.forEach(c=>{c.dataset.modeHidden=String(Boolean(ids&&!ids.includes(c.dataset.toolId)));});filterTools();}
+  bar.addEventListener("click",e=>{const b=e.target.closest("button[data-view]");if(!b)return;mode=b.dataset.view;applyMode();});
+  window.__ffToolMode = () => ({mode, favs:get(favKey), recents:get(recentKey)});
+  applyMode();
 }
 
 // Desloca a página até uma seção existente.
@@ -228,3 +258,4 @@ document.addEventListener("keydown", (event) => {
     searchInput?.focus();
   }
 });
+

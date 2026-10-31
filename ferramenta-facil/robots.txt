@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-# O sitemap.xml será adicionado após a definição do endereço público definitivo.

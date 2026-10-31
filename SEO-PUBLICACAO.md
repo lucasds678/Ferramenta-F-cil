@@ -1,5 +1,14 @@
 # SEO e publicação — Ferramenta Fácil
 
+## Publicação atual (Cloudflare Pages)
+
+- Endereço público atual: `https://ferramenta-facil.pages.dev/`.
+- O arquivo `sitemap.xml` lista as páginas HTML públicas conhecidas desta versão.
+- O arquivo `robots.txt` aponta para o sitemap público.
+- Se o domínio mudar ou forem criadas/removidas páginas públicas, atualize o sitemap e o endereço nele.
+- Após publicar, teste `https://ferramenta-facil.pages.dev/sitemap.xml` e confirme que aparece XML, não a página inicial.
+- No Google Search Console, envie `sitemap.xml` na seção **Sitemaps**. Isso ajuda a descoberta, mas não garante indexação.
+
 ## Antes de publicar em um domínio próprio
 
 1. Substitua links e referências de domínio de exemplo pelo domínio real.

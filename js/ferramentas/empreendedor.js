@@ -254,6 +254,12 @@ function initCashFlow() {
     render();
   });
 
+  byId("exportCashFlowCsv")?.addEventListener("click", () => {
+    const header = ["Descrição", "Tipo", "Valor (R$)"];
+    const rows = movements.map((item) => [item.description, item.type === "entrada" ? "Entrada" : "Saída", item.amount.toFixed(2).replace(".", ",")]);
+    const csv = "\uFEFF" + [header, ...rows].map((row) => row.map((v) => `"${String(v ?? "").replace(/"/g, '""')}"`).join(";")).join("\r\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" }); const url = URL.createObjectURL(blob); const a = document.createElement("a"); a.href=url; a.download="fluxo-de-caixa-ferramenta-facil.csv"; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
   byId("clearCashFlow")?.addEventListener("click", () => {
     if (!window.confirm("Deseja apagar todas as movimentações salvas neste navegador?")) return;
     movements = [];
